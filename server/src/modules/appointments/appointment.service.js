@@ -1,6 +1,8 @@
 import { pool } from "../../db/pool.js";
 import { calculateDuration, formatAppointmentTime } from "../../utils/datetime.js";
 import * as appointmentRepository from "./appointment.repository.js";
+import { sendAppointmentConfirmation } from "../../services/email.service.js";
+import { findPatientById } from "../users/user.service.js";
 
 export async function listAppointments(filters = {}) {
   return appointmentRepository.findAppointments(filters);
@@ -168,4 +170,3 @@ function normalizeLimit(limit, min, max) {
   }
   return Math.min(Math.max(value, min), max);
 }
-
